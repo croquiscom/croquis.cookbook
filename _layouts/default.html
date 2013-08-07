@@ -8,12 +8,12 @@ divisions:
   <head>
     <meta charset='utf-8'>
     <title>croquis.com Cookbook - {{ page.title }}</title>
-    <link rel='stylesheet' href='/style.css' type='text/css'>
+    <link rel='stylesheet' href='{{ site.baseurl }}/style.css' type='text/css'>
   </head>
   <body>
     <aside id='sidebar'>
       <div>
-        <a href='/'>Home</a>
+        <a href='{{ site.baseurl }}/'>Home</a>
       </div>
       <ol id='divisions-list'>
 {% for division in page.divisions %}
@@ -21,7 +21,7 @@ divisions:
   {% capture indexurl %}{{ url }}/index.html{% endcapture %}
         <li class='division'>
           <div class='division-title{% if page.url == indexurl %} active{% endif %}'>
-            <a href='{{ indexurl }}'>{{ division }}</a>
+            <a href='{{ site.baseurl }}{{ indexurl }}'>{{ division }}</a>
           </div>
           <ul class='recipes-list'>
   {% for site_page in site.pages %}
@@ -29,7 +29,7 @@ divisions:
       {% unless site_page.url == indexurl %}
             <li>
               <div class='recipe-title{% if page.url == site_page.url %} active{% endif %}'>
-                <a href='{{ site_page.url }}'>{{ site_page.title }}</a>
+                <a href='{{ site.baseurl }}{{ site_page.url }}'>{{ site_page.title }}</a>
               </div>
             </li>
       {% endunless %}
