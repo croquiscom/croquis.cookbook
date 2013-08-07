@@ -1,0 +1,50 @@
+---
+divisions:
+- JavaScript
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>croquis.com Cookbook - {{ page.title }}</title>
+    <link rel='stylesheet' href='/style.css' type='text/css'>
+  </head>
+  <body>
+    <aside id='sidebar'>
+      <div>
+        <a href='/'>Home</a>
+      </div>
+      <ol id='divisions-list'>
+{% for division in page.divisions %}
+  {% capture url %}/divisions/{{ division | replace: ' ', '_' | downcase }}{% endcapture %}
+  {% capture indexurl %}{{ url }}/index.html{% endcapture %}
+        <li class='division'>
+          <div class='division-title{% if page.url == indexurl %} active{% endif %}'>
+            <a href='{{ indexurl }}'>{{ division }}</a>
+          </div>
+          <ul class='recipes-list'>
+  {% for site_page in site.pages %}
+    {% if site_page.url contains url %}
+      {% unless site_page.url == indexurl %}
+            <li>
+              <div class='recipe-title{% if page.url == site_page.url %} active{% endif %}'>
+                <a href='{{ site_page.url }}'>{{ site_page.title }}</a>
+              </div>
+            </li>
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+          </ul>
+        </li>
+{% endfor %}
+      </ol>
+    </aside>
+    <section id='container'>
+      <article id='content'>{{ content }}</article>
+      <footer>
+        <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /></a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+      </footer>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+#sidebar {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	bottom: 20px;
+	width: 380px;
+	background-color: #f7f5fa;
+}
+
+#container {
+	margin-left: 410px;
+}
+
+h1 {
+	font-size: 2em;
+	border-left: 3px solid green;
+	border-top: 3px solid green;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+.division-title {
+	font-weight: bold;
+}
+
+.recipes-list {
+	padding-left: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: #428bca;
+}
+
+.active a {
+	color: #563d7c;
+	font-weight: bold;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+footer {
+	border-top: 1px solid #eeeeee;
+	margin-top: 20px;
+	padding-top: 20px;
+	font-size: 0.8em;
+}

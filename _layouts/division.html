@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+{{ content }}
+
+{% capture url %}/divisions/{{ page.division | replace: ' ', '_' | downcase }}{% endcapture %}
+{% capture indexurl %}{{ url }}/index.html{% endcapture %}
+
+<ul>
+  {% for page in site.pages %}
+    {% if page.url contains url %}
+      {% unless page.url == indexurl %}
+  <li>
+    <a href='{{ page.url }}'>{{ page.title }}</a>
+  </li>
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+</ul>
