@@ -8,11 +8,13 @@ layout: default
 {% capture indexurl %}{{ url }}/index.html{% endcapture %}
 
 <ul>
-  {% for page in site.pages %}
-    {% if page.url contains url %}
-      {% unless page.url == indexurl %}
+  {% for site_page in site.pages %}
+    {% capture site_page_url_slash %}{{ site_page.url }}/{% endcapture %}
+    {% capture url_slash %}{{ url }}/{% endcapture %}
+    {% if site_page_url_slash contains url_slash %}
+      {% unless site_page.url == indexurl %}
   <li>
-    <a href='{{ site.baseurl }}{{ page.url }}'>{{ page.title }}</a>
+    <a href='{{ site.baseurl }}{{ site_page.url }}'>{{ site_page.title }}</a>
   </li>
       {% endunless %}
     {% endif %}

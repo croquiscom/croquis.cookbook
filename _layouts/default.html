@@ -1,6 +1,20 @@
 ---
-divisions:
-- JavaScript
+categories:
+  - name: Languages
+    divisions:
+      - JavaScript
+      - CoffeeScript
+      - Java
+      - Objective C
+  - name: Platforms
+    divisions:
+      - iOS
+      - Android
+      - HTML5
+  - name: Products
+    divisions:
+      - MySQL
+      - MongoDB
 ---
 
 <!DOCTYPE html>
@@ -15,30 +29,37 @@ divisions:
       <div>
         <a href='{{ site.baseurl }}/'>Home</a>
       </div>
-      <ol id='divisions-list'>
-{% for division in page.divisions %}
+      <section id='categories-list'>
+{% for category in page.categories %}
+        <div class='category'>{{ category.name }}</div>
+        <ol class='divisions-list'>
+{% for division in category.divisions %}
   {% capture url %}/divisions/{{ division | replace: ' ', '_' | downcase }}{% endcapture %}
   {% capture indexurl %}{{ url }}/index.html{% endcapture %}
-        <li class='division'>
-          <div class='division-title{% if page.url == indexurl %} active{% endif %}'>
-            <a href='{{ site.baseurl }}{{ indexurl }}'>{{ division }}</a>
-          </div>
-          <ul class='recipes-list'>
+          <li class='division'>
+            <div class='division-title{% if page.url == indexurl %} active{% endif %}'>
+              <a href='{{ site.baseurl }}{{ indexurl }}'>{{ division }}</a>
+            </div>
+            <ul class='recipes-list'>
   {% for site_page in site.pages %}
-    {% if site_page.url contains url %}
+    {% capture site_page_url_slash %}{{ site_page.url }}/{% endcapture %}
+    {% capture url_slash %}{{ url }}/{% endcapture %}
+    {% if site_page_url_slash contains url_slash %}
       {% unless site_page.url == indexurl %}
-            <li>
-              <div class='recipe-title{% if page.url == site_page.url %} active{% endif %}'>
-                <a href='{{ site.baseurl }}{{ site_page.url }}'>{{ site_page.title }}</a>
-              </div>
-            </li>
+              <li>
+                <div class='recipe-title{% if page.url == site_page.url %} active{% endif %}'>
+                  <a href='{{ site.baseurl }}{{ site_page.url }}'>{{ site_page.title }}</a>
+                </div>
+              </li>
       {% endunless %}
     {% endif %}
   {% endfor %}
-          </ul>
-        </li>
+            </ul>
+          </li>
 {% endfor %}
-      </ol>
+        </ol>
+{% endfor %}
+      </section>
     </aside>
     <section id='container'>
       <article id='content'>{{ content }}</article>
